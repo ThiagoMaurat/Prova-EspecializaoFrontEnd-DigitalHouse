@@ -49,7 +49,7 @@ const PaginaInicio = () => {
       </div>
       <Filtros ref={ref} />
       <Paginacao
-        postPerPage={postEachPage}
+        postEachPage={postEachPage}
         totalPosts={rickMory.length}
         paginate={paginate}
       />
