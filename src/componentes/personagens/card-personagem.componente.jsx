@@ -15,7 +15,7 @@ const CardPersonagem = ({ character }) => {
       <img src={character.image} alt="Rick Sanchez" />
       <div className="card-personagem-body">
         <span>{character.name}</span>
-        <BotaoFavorito isFavorito={false} />
+        <BotaoFavorito character={character} />
       </div>
     </div>
   );

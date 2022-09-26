@@ -5,6 +5,7 @@ import GradePersonagens from "../componentes/personagens/grade-personagens.compo
 import {
   favoriteCharactersSelector,
   getFavCharacter,
+  setSelectedFavoriteCharacter,
 } from "../states/rickMory/character";
 
 /**
@@ -17,17 +18,15 @@ import {
  */
 const PaginaFavoritos = () => {
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getFavCharacter());
-  }, [dispatch]);
-  const favCharacters = useSelector(favoriteCharactersSelector);
+  const selectorPersonagem = useSelector(favoriteCharactersSelector);
+  console.log(selectorPersonagem);
   return (
     <div className="container">
       <div className="actions">
         <h3>Personagens Favoritos</h3>
         <button className="danger">Test Button</button>
       </div>
-      <GradePersonagens character={favCharacters} />
+      <GradePersonagens character={selectorPersonagem.map((item) => item)} />
     </div>
   );
 };

@@ -6,6 +6,7 @@ import {
   removeCharacters,
   selectedCharactersSelector,
   getFavCharacter,
+  setFavoriteCharacters,
 } from "../../states/rickMory/character";
 /**
  * Botão que indica se um elemento é favorito ou não, e dá a possibilidade de marcá-lo/desmarcá-lo
@@ -15,19 +16,15 @@ import {
  *
  * @returns Elemento JSX
  */
-const BotaoFavorito = ({ isFavorito, charId }) => {
+const BotaoFavorito = ({ isFavorito, character }) => {
+  /* console.log(setSelectedFavoriteCharacter); */
   const dispatch = useDispatch();
   const selectorPersonagem = useSelector(setSelectedFavoriteCharacter);
   const src = isFavorito ? "/imagenes/star-filled.png" : "/imagenes/star.png";
 
   const handleClick = () => {
-    if (selectorPersonagem.includes(charId)) {
-      dispatch(removeCharacters(charId));
-      dispatch(getFavCharacter());
-    } else {
-      dispatch(addCharacters(charId));
-      dispatch(getFavCharacter());
-    }
+    dispatch(setFavoriteCharacters(character));
+    console.log(character);
   };
   return (
     <div>

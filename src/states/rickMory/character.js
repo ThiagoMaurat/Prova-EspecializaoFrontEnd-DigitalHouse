@@ -24,7 +24,7 @@ const slice = createSlice({
       );
     },
     setFavoriteCharacters(state, action) {
-      state.favoriteCharacters = action.payload;
+      state.favoriteCharacters.push(action.payload);
     },
 
     setIsLoading: (state, action) => {
@@ -80,27 +80,13 @@ export const listSelector = (state) => state.RickMory.list;
 export const favoriteCharacter = (state) => state.RickMory.availableCharacters;
 export const searchSelector = (state) => state.RickMory.search;
 export const setSelectedFavoriteCharacter = (state) =>
-  state.RickMory.setSelectedFavoriteCharacter;
-export const isFavoritoSelector = (state) => state.cart.isFavorito;
+  state.RickMory.favoriteCharacters;
 export const favoriteCharactersSelector = (state) =>
-  state.cart.favoriteCharacters;
+  state.RickMory.favoriteCharacters;
 
 export const isLoadingSelector = (state) => state.cart.isLoading;
 
 // ACTIONS
-
-export const fetchAvailableProducts = () => ({
-  type: "cart/fetchAvailableProducts",
-});
-export const addCharacters = (character) => ({
-  type: "cart/addCharacters",
-  payload: character,
-});
-export const removeCharacters = (id) => ({
-  type: "cart/removeCharacters",
-  payload: id,
-});
-export const getFavCharacter = () => ({ type: "cart/getFavCharacter" });
 
 export const {
   addProduct,
@@ -108,6 +94,7 @@ export const {
   setRickMory,
   setIsLoading,
   setSearch,
+  setFavoriteCharacters,
 } = slice.actions;
 
 // REDUCER
