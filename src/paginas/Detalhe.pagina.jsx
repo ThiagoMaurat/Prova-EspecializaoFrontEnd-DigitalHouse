@@ -29,7 +29,7 @@ const PaginaDetalhe = () => {
             <p>Planeta: Earth</p>
             <p>Genero: Male</p>
           </div>
-          <BotaoFavorito isFavorito={false} />
+          <BotaoFavorito />
         </div>
       </div>
       <h4>Lista de episódios em que o personagem apareceu</h4>

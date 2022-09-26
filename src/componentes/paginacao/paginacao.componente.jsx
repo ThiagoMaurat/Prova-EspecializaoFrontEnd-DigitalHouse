@@ -8,10 +8,10 @@ import "./paginacao.css";
  *
  * @returns Elemento JSX
  */
-const Paginacao = ({ postPerPage, totalPosts, paginate }) => {
+const Paginacao = ({ postEachPage, totalPosts, paginate }) => {
   const pageNumbers = [];
 
-  for (let i = 1; i <= Math.ceil(totalPosts / postPerPage); i++) {
+  for (let i = 1; i <= Math.ceil(totalPosts / postEachPage); i++) {
     pageNumbers.push(i);
   }
   return (

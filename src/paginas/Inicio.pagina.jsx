@@ -21,15 +21,15 @@ const PaginaInicio = () => {
   const rickMory = useSelector(listSelector);
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(9);
+  const [postEachPage] = useState(9);
   console.log(rickMory);
   useEffect(() => {
     dispatch(fetchRick());
   }, [dispatch]);
 
   // get current posts
-  const LastCharacter = currentPage * postsPerPage;
-  const FirstCharacter = LastCharacter - postsPerPage;
+  const LastCharacter = currentPage * postEachPage;
+  const FirstCharacter = LastCharacter - postEachPage;
   const currentposts = rickMory.slice(FirstCharacter, LastCharacter);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   const ref = createRef(null);
@@ -49,7 +49,7 @@ const PaginaInicio = () => {
       </div>
       <Filtros ref={ref} />
       <Paginacao
-        postPerPage={postsPerPage}
+        postPerPage={postEachPage}
         totalPosts={rickMory.length}
         paginate={paginate}
       />
