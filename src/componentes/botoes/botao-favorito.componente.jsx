@@ -6,6 +6,7 @@ import {
   removeCharacters,
   selectedCharactersSelector,
   getFavCharacter,
+  removeCharacterFromList,
   setFavoriteCharacters,
 } from "../../states/rickMory/character";
 /**
@@ -24,6 +25,7 @@ const BotaoFavorito = ({ isFavorito, character }) => {
 
   const handleClick = () => {
     dispatch(setFavoriteCharacters(character));
+    dispatch(removeCharacterFromList(character));
     console.log(character);
   };
   return (

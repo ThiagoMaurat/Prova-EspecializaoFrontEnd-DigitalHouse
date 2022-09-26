@@ -26,7 +26,9 @@ const PaginaFavoritos = () => {
         <h3>Personagens Favoritos</h3>
         <button className="danger">Test Button</button>
       </div>
-      <GradePersonagens character={selectorPersonagem.map((item) => item)} />
+      <GradePersonagens
+        character={selectorPersonagem.map((item, index) => item)}
+      />
     </div>
   );
 };
