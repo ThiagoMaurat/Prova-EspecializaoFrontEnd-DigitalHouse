@@ -5,8 +5,9 @@ import {
   setSearch,
   fetchRickSearch,
 } from "../../states/rickMory/character";
+import React from "react";
 
-const Filtros = () => {
+const Filtros = React.forwardRef((props, ref) => {
   const dispatch = useDispatch();
   const search = useSelector(searchSelector);
   return (
@@ -16,6 +17,7 @@ const Filtros = () => {
         type="text"
         placeholder="Rick, Morty, Beth, Alien, ...etc"
         name="nome"
+        ref={ref}
         value={search}
         onChange={(e) => {
           dispatch(setSearch(e.target.value));
@@ -24,6 +26,6 @@ const Filtros = () => {
       />
     </div>
   );
-};
+});
 
 export default Filtros;

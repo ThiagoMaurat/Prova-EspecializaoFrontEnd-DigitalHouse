@@ -1,7 +1,6 @@
 import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { fetchRick } from "../states/rickMory/character";
 import GradePersonagens from "../componentes/personagens/grade-personagens.componente";
 import {
   favoriteCharactersSelector,

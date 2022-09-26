@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { api } from "../../services/axios";
 
 // Slice
 const slice = createSlice({
@@ -47,14 +46,18 @@ const slice = createSlice({
 // THUNK
 export const fetchRick = createAsyncThunk("Rick/fetch", async () => {
   let result = [];
-  for (let i = 1; i <= 42; i++) {
+  let url = "https://rickandmortyapi.com/api/character";
+  const response = await fetch(url);
+  const responsejson = await response.json();
+  await responsejson.results.forEach((item) => result.push(item));
+  return result;
+  /* for (let i = 1; i <= 42; i++) {
     const response = await fetch(
       `https://rickandmortyapi.com/api/character?page=${i}`
     );
     const responsejson = await response.json();
     await responsejson.results.forEach((item) => result.push(item));
-  }
-  return result;
+  } */
 });
 
 export const fetchRickSearch = createAsyncThunk(

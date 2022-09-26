@@ -1,10 +1,14 @@
 import Filtros from "../componentes/personagens/filtros.componente";
 import GradePersonagens from "../componentes/personagens/grade-personagens.componente";
 import Paginacao from "../componentes/paginacao/paginacao.componente";
-import { useEffect, useState } from "react";
+import { createRef, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchRick } from "../states/rickMory/character";
-import { listSelector } from "../states/rickMory/character";
+import {
+  listSelector,
+  fetchRickSearch,
+  setSearch,
+} from "../states/rickMory/character";
 /**
  * Esta é a página principal. Aqui você deve ver o painel de filtro junto com a grade de personagens.
  *
@@ -28,14 +32,22 @@ const PaginaInicio = () => {
   const FirstCharacter = LastCharacter - postsPerPage;
   const currentposts = rickMory.slice(FirstCharacter, LastCharacter);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const ref = createRef(null);
 
+  const clearRefAndDispatch = () => {
+    ref.current.value = "";
+    dispatch(setSearch(""));
+    dispatch(fetchRickSearch());
+  };
   return (
     <div className="container">
       <div className="actions">
         <h3>Catálogo de Personagens</h3>
-        <button className="danger">Test Button</button>
+        <button onClick={() => clearRefAndDispatch()} className="danger">
+          Limpar Filtros
+        </button>
       </div>
-      <Filtros />
+      <Filtros ref={ref} />
       <Paginacao
         postPerPage={postsPerPage}
         totalPosts={rickMory.length}
