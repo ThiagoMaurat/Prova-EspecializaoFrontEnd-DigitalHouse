@@ -2,10 +2,6 @@ import "./botao-favorito.css";
 import { useDispatch, useSelector } from "react-redux";
 import { setSelectedFavoriteCharacter } from "../../states/rickMory/character";
 import {
-  addCharacters,
-  removeCharacters,
-  selectedCharactersSelector,
-  getFavCharacter,
   removeFromFav,
   removeCharacterFromList,
   setFavoriteCharacters,
