@@ -16,10 +16,19 @@ import { listSelector } from "../states/rickMory/character";
 const PaginaInicio = () => {
   const rickMory = useSelector(listSelector);
   const dispatch = useDispatch();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage, setPostsPerPage] = useState(9);
   console.log(rickMory);
   useEffect(() => {
     dispatch(fetchRick());
   }, [dispatch]);
+
+  // get current posts
+  const LastCharacter = currentPage * postsPerPage;
+  const FirstCharacter = LastCharacter - postsPerPage;
+  const currentposts = rickMory.slice(FirstCharacter, LastCharacter);
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   return (
     <div className="container">
       <div className="actions">
@@ -27,8 +36,12 @@ const PaginaInicio = () => {
         <button className="danger">Test Button</button>
       </div>
       <Filtros />
-      <Paginacao />
-      <GradePersonagens character={rickMory.map((item) => item)} />
+      <Paginacao
+        postPerPage={postsPerPage}
+        totalPosts={rickMory.length}
+        paginate={paginate}
+      />
+      <GradePersonagens character={currentposts.map((item) => item)} />
       <Paginacao />
     </div>
   );

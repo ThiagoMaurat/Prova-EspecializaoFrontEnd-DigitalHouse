@@ -5,25 +5,29 @@ import { api } from "../../services/axios";
 const slice = createSlice({
   name: "RickMory",
   initialState: {
-    list: [],
     isLoading: false,
+    list: [],
+    isFavorito: false,
+    favoriteCharacters: [],
+    selectedCharacters: [],
     search: "",
-    availableProducts: [],
-    selectedProducts: [],
   },
   reducers: {
     setRickMory: (state, action) => {
       state.list.push(action.payload);
     },
-
-    addProduct: (state, action) => {
-      state.selectedProducts.push(action.payload);
+    isFavorito: (state, action) => {
+      state.isFavorito = action.payload;
     },
-    removeProduct: (state, action) => {
-      state.selectedProducts = state.selectedProducts.filter(
-        (product) => product.id !== action.payload.id
+    removeCharacters: (state, action) => {
+      state.selectedCharacters = state.selectedCharacters.filter(
+        (item) => item !== action.payload
       );
     },
+    setFavoriteCharacters(state, action) {
+      state.favoriteCharacters = action.payload;
+    },
+
     setIsLoading: (state, action) => {
       state.isLoading = action.payload;
     },
@@ -52,17 +56,30 @@ export const fetchRick = createAsyncThunk("Rick/fetch", async () => {
 
 // SELECTORS
 export const listSelector = (state) => state.RickMory.list;
+export const favoriteCharacter = (state) => state.RickMory.availableCharacters;
+export const setSelectedFavoriteCharacter = (state) =>
+  state.RickMory.setSelectedFavoriteCharacter;
+export const isFavoritoSelector = (state) => state.cart.isFavorito;
+export const favoriteCharactersSelector = (state) =>
+  state.cart.favoriteCharacters;
 
 export const isLoadingSelector = (state) => state.cart.isLoading;
-export const availableProductsSelector = (state) =>
-  state.cart.availableProducts;
-export const selectedProductsSelector = (state) => state.cart.selectedProducts;
-export const searchSelector = (state) => state.cart.search;
+
 // ACTIONS
 
 export const fetchAvailableProducts = () => ({
   type: "cart/fetchAvailableProducts",
 });
+export const addCharacters = (character) => ({
+  type: "cart/addCharacters",
+  payload: character,
+});
+export const removeCharacters = (id) => ({
+  type: "cart/removeCharacters",
+  payload: id,
+});
+export const getFavCharacter = () => ({ type: "cart/getFavCharacter" });
+
 export const {
   addProduct,
   removeProduct,
