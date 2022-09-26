@@ -4,24 +4,13 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 const slice = createSlice({
   name: "RickMory",
   initialState: {
-    isLoading: false,
     list: [],
-    isFavorito: false,
     favoriteCharacters: [],
-    selectedCharacters: [],
     search: "",
   },
   reducers: {
     setRickMory: (state, action) => {
       state.list.push(action.payload);
-    },
-    isFavorito: (state, action) => {
-      state.isFavorito = action.payload;
-    },
-    removeCharacters: (state, action) => {
-      state.favoriteCharacters = state.favoriteCharacters.filter(
-        (item) => item !== action.payload
-      );
     },
     removeCharacterFromList: (state, action) => {
       state.list = state.list.filter((item) => item.id !== action.payload.id);
