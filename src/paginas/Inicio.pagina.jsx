@@ -21,7 +21,7 @@ const PaginaInicio = () => {
   const rickMory = useSelector(listSelector);
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage, setPostsPerPage] = useState(9);
+  const [postsPerPage] = useState(9);
   console.log(rickMory);
   useEffect(() => {
     dispatch(fetchRick());

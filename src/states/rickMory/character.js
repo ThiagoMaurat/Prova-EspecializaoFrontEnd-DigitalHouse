@@ -30,9 +30,11 @@ const slice = createSlice({
       state.favoriteCharacters = state.list.filter(
         (item) => item === action.payload.id
       );
+      state.isFavorito = false;
     },
     setFavoriteCharacters(state, action) {
       state.favoriteCharacters.push(action.payload);
+      state.isFavorito = true;
     },
 
     setIsLoading: (state, action) => {
@@ -91,7 +93,7 @@ export const setSelectedFavoriteCharacter = (state) =>
   state.RickMory.favoriteCharacters;
 export const favoriteCharactersSelector = (state) =>
   state.RickMory.favoriteCharacters;
-
+export const isFavoriteState = (state) => state.RickMory.isFavorite;
 export const isLoadingSelector = (state) => state.cart.isLoading;
 
 // ACTIONS

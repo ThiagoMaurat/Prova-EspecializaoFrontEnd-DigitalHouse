@@ -6,6 +6,7 @@ import {
   removeCharacterFromList,
   setFavoriteCharacters,
 } from "../../states/rickMory/character";
+import { useLocation } from "react-router-dom";
 /**
  * Botão que indica se um elemento é favorito ou não, e dá a possibilidade de marcá-lo/desmarcá-lo
  *
@@ -14,8 +15,9 @@ import {
  *
  * @returns Elemento JSX
  */
-const BotaoFavorito = ({ isFavorito, character }) => {
+const BotaoFavorito = ({ character }) => {
   /* console.log(setSelectedFavoriteCharacter); */
+  const favoritos = useLocation().pathname;
   const dispatch = useDispatch();
   const selectorPersonagem = useSelector(setSelectedFavoriteCharacter);
   const handleClick = () => {
@@ -25,11 +27,10 @@ const BotaoFavorito = ({ isFavorito, character }) => {
       dispatch(removeCharacterFromList(character));
       dispatch(setFavoriteCharacters(character));
     }
-    console.log(character);
   };
   return (
     <div>
-      {selectorPersonagem ? (
+      {favoritos === "/favoritos" ? (
         <button className="botao-desfavorito" onClick={handleClick}>
           <div className="featherFalse">Unlike</div>
         </button>
