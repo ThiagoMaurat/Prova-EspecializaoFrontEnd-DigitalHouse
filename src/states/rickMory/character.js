@@ -39,6 +39,9 @@ const slice = createSlice({
     builder.addCase(fetchRick.fulfilled, (state, action) => {
       return { ...state, list: action.payload };
     });
+    builder.addCase(fetchRickSearch.fulfilled, (state, action) => {
+      return { ...state, list: action.payload };
+    });
   },
 });
 // THUNK
@@ -54,9 +57,25 @@ export const fetchRick = createAsyncThunk("Rick/fetch", async () => {
   return result;
 });
 
+export const fetchRickSearch = createAsyncThunk(
+  "Rick/fetchsearch",
+  async (search) => {
+    let result = [];
+    let url = "https://rickandmortyapi.com/api/character";
+    if (search) {
+      url = `${url}?name=${search}`;
+    }
+    const response = await fetch(url);
+    const responsejson = await response.json();
+    await responsejson.results.forEach((item) => result.push(item));
+    return result;
+  }
+);
+
 // SELECTORS
 export const listSelector = (state) => state.RickMory.list;
 export const favoriteCharacter = (state) => state.RickMory.availableCharacters;
+export const searchSelector = (state) => state.RickMory.search;
 export const setSelectedFavoriteCharacter = (state) =>
   state.RickMory.setSelectedFavoriteCharacter;
 export const isFavoritoSelector = (state) => state.cart.isFavorito;
