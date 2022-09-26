@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { fetchTodos } from "./states/rickMory/character";
+import { fetchRick } from "./states/rickMory/character";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import PaginaInicio from "./paginas/Inicio.pagina";
@@ -13,7 +13,7 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchTodos());
+    dispatch(fetchRick());
   }, [dispatch]);
 
   return (

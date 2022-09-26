@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { api } from "../../services/axios";
 
 // Slice
@@ -31,21 +31,24 @@ const slice = createSlice({
       state.search = action.payload;
     },
   },
+  extraReducers: (builder) => {
+    builder.addCase(fetchRick.fulfilled, (state, action) => {
+      return { ...state, list: action.payload };
+    });
+  },
 });
 // THUNK
-export function fetchTodos() {
-  return async (dispatch, getState, api) => {
-    let result = [];
-    for (let i = 1; i <= 42; i++) {
-      const response = await fetch(
-        `https://rickandmortyapi.com/api/character?page=${i}`
-      );
-      const responsejson = await response.json();
-      await responsejson.results.forEach((item) => result.push(item));
-    }
-    dispatch(setRickMory(result));
-  };
-}
+export const fetchRick = createAsyncThunk("Rick/fetch", async () => {
+  let result = [];
+  for (let i = 1; i <= 42; i++) {
+    const response = await fetch(
+      `https://rickandmortyapi.com/api/character?page=${i}`
+    );
+    const responsejson = await response.json();
+    await responsejson.results.forEach((item) => result.push(item));
+  }
+  return result;
+});
 
 // SELECTORS
 export const listSelector = (state) => state.RickMory.list;
