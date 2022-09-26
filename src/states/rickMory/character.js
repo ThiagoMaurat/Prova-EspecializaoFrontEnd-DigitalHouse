@@ -25,10 +25,6 @@ const slice = createSlice({
       state.favoriteCharacters.push(action.payload);
       state.isFavorito = true;
     },
-
-    setIsLoading: (state, action) => {
-      state.isLoading = action.payload;
-    },
     setSearch(state, action) {
       state.search = action.payload;
     },
