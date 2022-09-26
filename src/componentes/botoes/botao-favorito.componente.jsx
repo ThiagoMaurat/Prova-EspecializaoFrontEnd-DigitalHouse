@@ -6,6 +6,7 @@ import {
   removeCharacters,
   selectedCharactersSelector,
   getFavCharacter,
+  removeFromFav,
   removeCharacterFromList,
   setFavoriteCharacters,
 } from "../../states/rickMory/character";
@@ -21,16 +22,18 @@ const BotaoFavorito = ({ isFavorito, character }) => {
   /* console.log(setSelectedFavoriteCharacter); */
   const dispatch = useDispatch();
   const selectorPersonagem = useSelector(setSelectedFavoriteCharacter);
-  const src = isFavorito ? "/imagenes/star-filled.png" : "/imagenes/star.png";
-
   const handleClick = () => {
-    dispatch(setFavoriteCharacters(character));
-    dispatch(removeCharacterFromList(character));
+    if (selectorPersonagem.includes(character)) {
+      dispatch(removeFromFav(character));
+    } else {
+      dispatch(removeCharacterFromList(character));
+      dispatch(setFavoriteCharacters(character));
+    }
     console.log(character);
   };
   return (
     <div>
-      {isFavorito ? (
+      {selectorPersonagem ? (
         <button className="botao-desfavorito" onClick={handleClick}>
           <div className="featherFalse">Unlike</div>
         </button>

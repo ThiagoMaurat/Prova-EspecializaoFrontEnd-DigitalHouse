@@ -26,6 +26,11 @@ const slice = createSlice({
     removeCharacterFromList: (state, action) => {
       state.list = state.list.filter((item) => item.id !== action.payload.id);
     },
+    removeFromFav: (state, action) => {
+      state.favoriteCharacters = state.list.filter(
+        (item) => item === action.payload.id
+      );
+    },
     setFavoriteCharacters(state, action) {
       state.favoriteCharacters.push(action.payload);
     },
@@ -99,6 +104,7 @@ export const {
   setSearch,
   setFavoriteCharacters,
   removeCharacterFromList,
+  removeFromFav,
 } = slice.actions;
 
 // REDUCER
